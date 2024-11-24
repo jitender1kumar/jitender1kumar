@@ -5,5 +5,6 @@ qtyperouter
   .post('/', Qtypecontroller.createQtypeTask)
   .get('/', Qtypecontroller.getQtypeTasks)
   .delete('/:_id',Qtypecontroller.deleteQtypeTasks)
+  .get('/:_id',Qtypecontroller.getidTasks)
   .put('/',Qtypecontroller.updateQtype)
 module.exports = qtyperouter

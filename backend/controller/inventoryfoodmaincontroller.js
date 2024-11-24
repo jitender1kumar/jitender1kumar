@@ -1,14 +1,12 @@
+const Task = require('../model/InventoryFoodMain');
 
-const QtypeModelTask = require('../model/QtypeModel');
-
-  
-  exports.createQtypeTask = async (req, res) => {
+  exports.createTask = async (req, res) => {
 
     try {
       // get the task from the body
       const taskData = await req.body;
       //create a new task then save
-      await QtypeModelTask.create(taskData)
+      await Task.create(taskData)
         .then((createdTask) => {
           if (!createdTask) return res.status(404)
             .json({
@@ -37,10 +35,11 @@ const QtypeModelTask = require('../model/QtypeModel');
         })
     }
   }
-  exports.getQtypeTasks = async (req, res) => {
+ 
+  exports.getTasks = async (req, res) => {
     //get all the data in the model and return it as response
     try {
-      QtypeModelTask.find()
+      Task.find()
         .then((allTasks) => {
           res.status(200)
             .json({
@@ -65,10 +64,10 @@ const QtypeModelTask = require('../model/QtypeModel');
         })
     }
   }
-  exports.deleteQtypeTasks = async (req, res) => {
+  exports.deleteTasks = async (req, res) => {
     //get all the data in the model and return it as response
     try {
-      const result = await QtypeModelTask.deleteOne({ _id: req.params });
+      const result = await Task.deleteOne({ _id: req.params });
      
       if (result.deletedCount === 0) {
         return res.status(404).json({ message: 'Task not found' });
@@ -78,17 +77,15 @@ const QtypeModelTask = require('../model/QtypeModel');
       res.status(500).json({ message: 'Internal server error', error: error.message });
     }  
   }
-
-
-  exports.updateQtype = async (req, res) => {
+  exports.updateTasks = async (req, res) => {
     
     try {
       
       const taskData = await req.body;
-      const { _id } = taskData.quantitytype;
-     // console.log(taskData.quantitytype);
+      const { _id } = taskData._InventoryFoodMain;
       // Ensure that id and updateData are provided
-      if (!_id || !taskData) {
+     // console.log(taskData.productcategory);
+      if (!_id || !taskData._InventoryFoodMain) {
         return res.status(400).json({
           success: false,
           message: "Missing id or update data"
@@ -96,7 +93,7 @@ const QtypeModelTask = require('../model/QtypeModel');
       }
     
       // Perform the update operation
-      const result = await QtypeModelTask.updateOne({ _id: _id }, taskData.quantitytype);
+      const result = await Task.updateOne({ _id: _id }, taskData._InventoryFoodMain);
     
       if (result.nModified === 0) {
         return res.status(404).json({
@@ -118,32 +115,3 @@ const QtypeModelTask = require('../model/QtypeModel');
       });
     }
   }
-  exports.getidTasks = async (req, res) => {
-    try {
-      console.log(req.params);
-      QtypeModelTask.find(req.params)
-      .then((allTasks) => {
-        res.status(200)
-          .json({
-            success: true,
-            allTasks
-          })
-      })
-      .catch((error) => {
-        res.status(404)
-          .json({
-            success: false,
-            message: "Cant fined ",
-            error
-          })
-      })
-  } catch (error) {
-    res.status(500)
-      .json({
-        success: false,
-        message: "Internal server error",
-        error: error.message
-      })
-  }
-     
-   }

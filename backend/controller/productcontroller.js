@@ -110,6 +110,35 @@ const productmodelTask = require('../model/productmodel');
   }
      
    }
+   exports.getproductbyProductNameTasks2 = async (req, res) => {
+    try {
+      console.log(req.params);
+        productmodelTask.find(req.params)
+      .then((allTasks) => {
+        res.status(200)
+          .json({
+            success: true,
+            allTasks
+          })
+      })
+      .catch((error) => {
+        res.status(404)
+          .json({
+            success: false,
+            message: "Cant fined ",
+            error
+          })
+      })
+  } catch (error) {
+    res.status(500)
+      .json({
+        success: false,
+        message: "Internal server error",
+        error: error.message
+      })
+  }
+     
+   }
    exports.getproductbyidTasks2 = async (req, res) => {
     try {
         productmodelTask.find(req.params)

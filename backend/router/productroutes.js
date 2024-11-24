@@ -6,7 +6,6 @@ productouter
   .get('/', productscontroller.getproductTask)
   
   .get('/:_id', productscontroller.getproductbyidTasks2)
-  //.get('/:selectcategoryID', productscontroller.getproductbyidTasks)
   .delete('/:_id',productscontroller.deleteproductTasks)
   .put('/',productscontroller.updateproduct)
 module.exports = productouter

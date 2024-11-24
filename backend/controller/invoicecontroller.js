@@ -156,12 +156,15 @@ const invoicemodelTask = require('../model/invoicemodel');
    exports.getinvoicebydateTasks2 = async (req, res) => {
     //const {startDateTime } = req.params.startDateTime;
     //const {endDateTime } = req.params;
-  // console.log(req.params);
+ 
    // console.log(endDateTime);
-    try {                                                              
+    try {           
+      const {createdAt}=req.params;
+      const splittime= createdAt.split('Time:');
+      const addzerotime=splittime[0]+'Time:00-00-00'
+      console.log(addzerotime);                                                   
         const results = await invoicemodelTask.find({
-          
-            createdAt: { $lte: new Date( req.params) }
+            createdAt: { $gte:  addzerotime }
         });
         res.json(results);
        

@@ -120,6 +120,8 @@ const ppmodelTask = require('../model/ppmodel');
 
   exports.getppbyidTasks = async (req, res) => {
     try {
+      const { selectcategoryID } = req.params;
+      console.log(req.params);
         ppmodelTask.find(req.params)
       .then((allTasks) => {
         res.status(200)
@@ -146,7 +148,96 @@ const ppmodelTask = require('../model/ppmodel');
   }
      
    }
-
+   exports.getppbybasetypeidTasks = async (req, res) => {
+    try {
+      const { selectBaseTypeID } = req.params;
+      console.log(req.params);
+        ppmodelTask.find(req.params)
+      .then((allTasks) => {
+        res.status(200)
+          .json({
+            success: true,
+            allTasks
+          })
+      })
+      .catch((error) => {
+        res.status(404)
+          .json({
+            success: false,
+            message: "Cant fined ",
+            error
+          })
+      })
+  } catch (error) {
+    res.status(500)
+      .json({
+        success: false,
+        message: "Internal server error",
+        error: error.message
+      })
+  }
+     
+   }
+   exports.getppbyQtypeidTasks = async (req, res) => {
+    try {
+      const { selectQtypeID } = req.params;
+      console.log(req.params);
+        ppmodelTask.find(req.params)
+      .then((allTasks) => {
+        res.status(200)
+          .json({
+            success: true,
+            allTasks
+          })
+      })
+      .catch((error) => {
+        res.status(404)
+          .json({
+            success: false,
+            message: "Cant fined ",
+            error
+          })
+      })
+  } catch (error) {
+    res.status(500)
+      .json({
+        success: false,
+        message: "Internal server error",
+        error: error.message
+      })
+  }
+     
+   }
+   exports.getproductbyidTasks2 = async (req, res) => {
+    try {
+      const { SelectProductId } = req.params;
+      console.log(req.params);
+        ppmodelTask.find(req.params)
+      .then((allTasks) => {
+        res.status(200)
+          .json({
+            success: true,
+            allTasks
+          })
+      })
+      .catch((error) => {
+        res.status(404)
+          .json({
+            success: false,
+            message: "Cant fined ",
+            error
+          })
+      })
+  } catch (error) {
+    res.status(500)
+      .json({
+        success: false,
+        message: "Internal server error",
+        error: error.message
+      })
+  }
+     
+   }
   exports.updatepp = async (req, res) => {
     
     try {
@@ -185,3 +276,5 @@ const ppmodelTask = require('../model/ppmodel');
       });
     }
   }
+
+  
